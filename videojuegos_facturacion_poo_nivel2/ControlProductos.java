@@ -3,6 +3,8 @@ import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 /**
  * Write a description of class ControlProductos here.
@@ -95,7 +97,7 @@ public class ControlProductos
             respuesta= sc.nextLine();
             if (respuesta.toUpperCase().equals("SI")){
                 disponible="true";
-            }else if(respuesta.toUpperCase().equals("N0")){
+            }else if(respuesta.toUpperCase().equals("NO")){
                 disponible="false";
             }else{
                 System.out.print("Opcion incorrecta");
@@ -173,12 +175,167 @@ public class ControlProductos
         System.out.println("Registrado exitosamente");
     }
 
-    
-    
-    
-    
-    
-    
+    public static void mostrarProductos(){
+        String opcion="";
+        System.out.println("\nQue tipo de producto quieres mostrar:\n"
+            +"1. Cine \n"
+            +"2. Musica \n"
+            +"3. Videojuegos \n");            
+        opcion=sc.nextLine();
+        switch(opcion){
+            case "1":
+                System.out.println("Has seleccionado mostrar: cine");
+                ControlProductos.imprimirCine(ControlProductos.obtenerDatosCine());
+                break;
+            case "2":
+                System.out.println("Has seleccionado insertar producto: musica");
+                ControlProductos.imprimirMusica(ControlProductos.obtenerDatosMusica());
+                break;
+            case "3":
+                System.out.println("Has seleccionado insertar producto: videojuegos");
+                ControlProductos.imprimirVideojuego(ControlProductos.obtenerDatosVideojuego());
+                break;
+            default:
+                System.out.println("Has seleccionado una opción incorrecta");
+        }
+
+    }
+
+    public static ArrayList<Cine> obtenerDatosCine() {
+        ArrayList<Cine> peliculas = new ArrayList<>();
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
+            bufferedReader = new BufferedReader(fileReader);
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                String[] arrayPelicula = linea.split(SEPARADOR_CAMPO);
+                cproducto = new CaracteristicasProductos(arrayPelicula[0],Double.parseDouble(arrayPelicula[1]),Integer.parseInt(arrayPelicula[2]), Boolean.parseBoolean( arrayPelicula[3]));
+                peliculas.add(new Cine(cproducto,arrayPelicula[4]));
+            }
+        } catch (IOException e) {
+            System.out.println("Excepción leyendo archivo: " + e.getMessage());
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Excepción cerrando: " + e.getMessage());
+            }
+            return peliculas;
+        }
+    }
+
+    public static void imprimirCine(ArrayList<Cine> peliculas) {
+        ArrayList<Cine> pelicula = ControlProductos.obtenerDatosCine();
+        System.out.println(
+            "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        System.out.printf("|%-40s|%-15s|%-15s|%-10s|%-40s|\n", "Nombre", "precioUnit", "cantStock", "disponible","Director");
+        System.out.println(
+            "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        for (int x = 0; x < pelicula.size(); x++) {
+            Cine cine = pelicula.get(x);
+            System.out.printf("|%-40s|%-15s|%-15s|%-10s|%-40s|\n", cine.getNombre(), cine.getPrecioUnit(),cine.getCantStock(),cine.isDisponible(),cine.getDirector() );
+            System.out.println(
+                "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        }
+    }
+
+    public static ArrayList<Musica> obtenerDatosMusica() {
+        ArrayList<Musica> canciones = new ArrayList<>();
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            fileReader = new FileReader(NOMBRE_ARCHIVO_MUSICA);
+            bufferedReader = new BufferedReader(fileReader);
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                String[] arrayCanciones = linea.split(SEPARADOR_CAMPO);
+                cproducto = new CaracteristicasProductos(arrayCanciones[0],Double.parseDouble(arrayCanciones[1]),Integer.parseInt(arrayCanciones[2]), Boolean.parseBoolean( arrayCanciones[3]));
+                canciones.add(new Musica(cproducto,arrayCanciones[4]));
+            }
+        } catch (IOException e) {
+            System.out.println("Excepción leyendo archivo: " + e.getMessage());
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Excepción cerrando: " + e.getMessage());
+            }
+            return canciones;
+        }
+    }
+
+    public static void imprimirMusica(ArrayList<Musica> canciones) {
+        ArrayList<Musica> cancion = ControlProductos.obtenerDatosMusica();
+        System.out.println(
+            "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        System.out.printf("|%-40s|%-15s|%-15s|%-10s|%-40s|\n", "Nombre", "precioUnit", "cantStock", "disponible","Cantante");
+        System.out.println(
+            "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        for (int x = 0; x < cancion.size(); x++) {
+            Musica musica = cancion.get(x);
+            System.out.printf("|%-40s|%-15s|%-15s|%-10s|%-40s|\n",musica.getNombre(), musica.getPrecioUnit(),musica.getCantStock(),musica.isDisponible(),musica.getCantante() );
+            System.out.println(
+                "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        }
+    }
+
+    public static ArrayList<Videojuego> obtenerDatosVideojuego() {
+        ArrayList<Videojuego> videojuegos = new ArrayList<>();
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            fileReader = new FileReader(NOMBRE_ARCHIVO_VIDEOJUEGOS);
+            bufferedReader = new BufferedReader(fileReader);
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                String[] arrayVideojuegos = linea.split(SEPARADOR_CAMPO);
+                cproducto = new CaracteristicasProductos(arrayVideojuegos[0],Double.parseDouble(arrayVideojuegos[1]),Integer.parseInt(arrayVideojuegos[2]), Boolean.parseBoolean(arrayVideojuegos[3]));
+                videojuegos.add(new Videojuego(cproducto,arrayVideojuegos[4]));
+            }
+        } catch (IOException e) {
+            System.out.println("Excepción leyendo archivo: " + e.getMessage());
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Excepción cerrando: " + e.getMessage());
+            }
+            return videojuegos;
+        }
+    }
+
+    public static void imprimirVideojuego(ArrayList<Videojuego> videojuegos) {
+        ArrayList<Videojuego> videojuego = ControlProductos.obtenerDatosVideojuego();
+        System.out.println(
+            "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        System.out.printf("|%-40s|%-15s|%-15s|%-10s|%-40s|\n", "Nombre", "precioUnit", "cantStock", "disponible","Videoconsola");
+        System.out.println(
+            "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        for (int x = 0; x < videojuego.size(); x++) {
+            Videojuego videojue = videojuego.get(x);
+            System.out.printf("|%-40s|%-15s|%-15s|%-10s|%-40s|\n", videojue.getNombre(), videojue.getPrecioUnit(),videojue.getCantStock(),videojue.isDisponible(),videojue.getVideoconsola() );
+            System.out.println(
+                "+-----+----------+----------------------------------------+----------------------------------------+--------------------+");
+        }
+    }
+
     
     public void mostrarProductos(Producto[] productos) { 
         for (int i = 0; i < productos.length; i++) {
