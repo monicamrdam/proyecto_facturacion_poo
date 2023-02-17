@@ -28,7 +28,7 @@ public class DetalleComprobante
     public void setCantidad(int cantidad){
         this.cantidad=cantidad;
     }
-    public double calcularTotal(){
+    private double calcularTotal(){
         return cantidad + producto.getPrecio();
     }   
     public void setTotal(){
