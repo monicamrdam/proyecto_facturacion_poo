@@ -45,4 +45,12 @@ public class DetalleComprobante
     public String toString(){
         return "Producto{" + "descripcion=" + producto.getDescripcion() + ", precio unitario=" + producto.getPrecio() + ", precio total=" + getTotal()+"}";
     }
+    public String reporteDescripcion(){
+        String mensaje = "";
+        mensaje += "Producto: " + producto.getDescripcion();
+        mensaje += " | Unidades " + cantidad;
+        mensaje += " | Precio Unitario " + producto.getPrecio();
+        mensaje += " | Precio " + total;
+        return mensaje;
+    }
 }
