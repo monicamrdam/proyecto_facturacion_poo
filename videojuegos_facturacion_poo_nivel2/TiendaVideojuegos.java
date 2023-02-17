@@ -26,7 +26,6 @@ public class TiendaVideojuegos
             case "1":
                 System.out.println("Has seleccionado insertar productos");
                 ControlProductos.solicitarDatosParaRegistrar();
-                
                 break;
             case "2":
                 System.out.println("Has seleccionado mostrar productos");
