@@ -1,10 +1,8 @@
 #BlueJ class context
 comment0.target=Producto
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Producto\ here.\r\n\ Clase\ padre\ Producto\ de\ la\ que\ hereda\ el\ resto\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n
-comment1.params=nombre\ precioUnit\ cantStock\ disponible
-comment1.target=Producto(java.lang.String,\ double,\ int,\ boolean)
-comment10.params=
-comment10.target=java.lang.String\ toString()
+comment1.params=cproductos
+comment1.target=Producto(CaracteristicasProductos)
 comment2.params=
 comment2.target=java.lang.String\ getNombre()
 comment3.params=nombre
@@ -21,4 +19,4 @@ comment8.params=
 comment8.target=boolean\ isDisponible()
 comment9.params=disponible
 comment9.target=void\ setDisponible(boolean)
-numComments=11
+numComments=10

@@ -7,22 +7,19 @@
  */
 public abstract class Producto
 {
-  private String nombre;
-  private double precioUnit;
-  private int cantStock;
-  private boolean disponible = false;
-  public static int dimesionArray;
-  
-   public Producto(String nombre, double precioUnit, int cantStock, boolean disponible) {
-    this.nombre   = nombre;
-    this.precioUnit = precioUnit;
-    this.cantStock  = cantStock;
-    this.disponible = disponible;
-    
-    dimesionArray++;//Se obtiene con esta variable la dimensión del array. Según número de instancias del constructor
-  }
-  public String getNombre() {
-    return this.nombre;
+    private String nombre;
+    private double precioUnit;
+    private int cantStock;
+    private boolean disponible;
+     private CaracteristicasProductos cproductos;
+     public Producto(CaracteristicasProductos cproductos){
+         this.nombre=cproductos.getNombre();
+         this.precioUnit=cproductos.getPrecioUnit();
+         this.cantStock=cproductos.getCantStock();
+         this.disponible=cproductos.isDisponible();
+     }
+     public String getNombre() {
+    return nombre;
   }
   public void setNombre(String nombre) {
     this.nombre = nombre;
@@ -46,10 +43,6 @@ public abstract class Producto
   public void setDisponible(boolean disponible) {
     this.disponible = disponible;
   }
-  @Override
-  public String toString() {
-    return  "Nombre: "      +this.getNombre()+    "n"+
-        "Precio unidad: " +this.getPrecioUnit()+  " €n"+
-        "En Stock: "    +this.getCantStock()+ "n";
-  }
+  
+  
 }
