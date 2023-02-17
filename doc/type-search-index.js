@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Comprobante"},{"p":"<Unnamed>","l":"DetalleComprobante"},{"p":"<Unnamed>","l":"Factura"},{"p":"<Unnamed>","l":"Facturacion"},{"p":"<Unnamed>","l":"Producto"},{"p":"<Unnamed>","l":"Recibo"}];updateSearchResults();
