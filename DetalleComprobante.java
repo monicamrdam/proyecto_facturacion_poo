@@ -7,5 +7,42 @@
  */
 public class DetalleComprobante
 {
-    git 
+    private int cantidad;
+    private Producto producto;
+    private double total;
+    
+    public DetalleComprobante(int cantidad, String descripcion, double precio){
+        this.cantidad=cantidad;
+        ingresarProductos(descripcion, precio);
+        setTotal();
+    }
+    public int getCantidad(){
+        return cantidad;
+    }
+    public Producto getProducto(){
+        return producto;
+    }
+    public double getTotal(){
+        return total;
+    }
+    public void setCantidad(int cantidad){
+        this.cantidad=cantidad;
+    }
+    public double calcularTotal(){
+        return cantidad + producto.getPrecio();
+    }   
+    public void setTotal(){
+        total=calcularTotal();
+    }
+    private Producto crearProducto(String descripcion, double precio){
+        Producto nuevoProducto=new Producto(descripcion, precio);
+        return nuevoProducto;
+    }
+    private void ingresarProductos(String descripcion, double precio){
+        producto = crearProducto(descripcion,precio);
+    }
+    @Override
+    public String toString(){
+        return "Producto{" + "descripcion=" + producto.getDescripcion() + ", precio unitario=" + producto.getPrecio() + ", precio total=" + getTotal()+"}";
+    }
 }
