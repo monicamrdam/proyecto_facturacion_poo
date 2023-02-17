@@ -21,7 +21,7 @@ public class Cine extends Producto
   }
   @Override
   public String toString() {
-    return  "Articulo de Cinen"+
+    return  "Articulo de Cine \n"+
         super.toString()+
         "Director: "  +this.director;
   }
