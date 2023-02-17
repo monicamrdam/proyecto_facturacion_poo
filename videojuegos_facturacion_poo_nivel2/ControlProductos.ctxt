@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=ControlProductos
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ControlProductos\ here.\r\n\ Clase\ gestiona\ los\ productos\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n
+comment1.params=
+comment1.target=ControlProductos()
+comment2.params=productos
+comment2.target=ControlProductos(Producto[])
+comment3.params=
+comment3.target=void\ solicitarDatosParaRegistrar()
+comment4.params=
+comment4.target=void\ solicitarDatosParaRegistrarMusica()
+comment5.params=musica
+comment5.target=void\ registrar(Musica)
+comment6.params=productos
+comment6.target=void\ mostrarProductos(Producto[])
+comment7.params=productos
+comment7.target=void\ mostrarNombreProductos(Producto[])
+comment8.params=productos\ num\ cantidadUnidades
+comment8.target=double\ comprarProducto(Producto[],\ int,\ int)
+comment9.params=
+comment9.target=double\ mostrarCaja()
+numComments=10
