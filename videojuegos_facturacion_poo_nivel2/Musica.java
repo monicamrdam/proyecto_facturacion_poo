@@ -9,8 +9,8 @@ public class Musica extends Producto
 {
   private String cantante;
   
-  public Musica(String nombre, double precioUnit, int cantStock, boolean disponible, String cantante) {
-    super(nombre, precioUnit, cantStock, disponible);
+  public Musica(CaracteristicasProductos cproducto, String cantante) {
+    super(cproducto);
     this.cantante = cantante;
   }
    public String getCantante() {

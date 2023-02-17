@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Musica
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Musica\ here.\r\n\ Clase\ Musica\ que\ extiende\ de\ Producto\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n
-comment1.params=nombre\ precioUnit\ cantStock\ disponible\ cantante
-comment1.target=Musica(java.lang.String,\ double,\ int,\ boolean,\ java.lang.String)
+comment1.params=cproducto\ cantante
+comment1.target=Musica(CaracteristicasProductos,\ java.lang.String)
 comment2.params=
 comment2.target=java.lang.String\ getCantante()
 comment3.params=cantante
