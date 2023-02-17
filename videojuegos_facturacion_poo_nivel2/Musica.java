@@ -21,7 +21,7 @@ public class Musica extends Producto
   }
   @Override
   public String toString() {
-    return  "Articulo de Musican"+
+    return  "Articulo de Musica \n"+
         super.toString()+
         "Cantante: "  +this.cantante;
   }
