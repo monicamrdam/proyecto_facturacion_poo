@@ -13,25 +13,31 @@ public class TiendaVideojuegos
         String opcion="";
        
         do{
-            System.out.println("\n Introduzca la opción que desea realizar:\n"
-                +"1. Mostrar productos \n"
-                +"2. Vender productos \n"
-                +"3. Mostrar caja\n"
-                +"4. Emitir factura\n"
+            System.out.println("\nIntroduzca la opción que desea realizar:\n"
+                +"1. Insertar Productos \n"
+                +"2. Mostrar productos \n"
+                +"3. Vender productos \n"
+                +"4. Mostrar caja\n"
+                +"5. Emitir factura\n"
                 +"0. Salir\n"
                 );            
             opcion=sc.nextLine();
             switch(opcion){
             case "1":
-                System.out.println("Has seleccionado mostrar productos");
+                System.out.println("Has seleccionado insertar productos");
+                ControlProductos.solicitarDatosParaRegistrar();
+                
                 break;
             case "2":
-                System.out.println("Has seleccionado comprar productos");
+                System.out.println("Has seleccionado mostrar productos");
                 break;
             case "3":
-                System.out.println("Has seleccionado mostrar caja");
+                System.out.println("Has seleccionado comprar productos");
                 break;
             case "4":
+                System.out.println("Has seleccionado mostrar caja");
+                break;
+            case "5":
                 System.out.println("Has seleccionado emitir factura");
                 break;
             case "0":
