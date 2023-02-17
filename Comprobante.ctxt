@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Comprobante
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Comprobante\ here.\r\n\ Clase\ Comprobante\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n
+comment1.params=fecha\ razonSocial
+comment1.target=Comprobante(java.lang.String,\ java.lang.String)
+comment2.params=cantidad\ descripcion\ precio
+comment2.target=DetalleComprobante\ crearDetalleComprobante(int,\ java.lang.String,\ double)
+comment3.params=cantidad\ descripcion\ precio
+comment3.target=void\ IngresarDetalleComprobante(int,\ java.lang.String,\ double)
+comment4.params=
+comment4.target=java.lang.String\ reporteComprobante()
+numComments=5
