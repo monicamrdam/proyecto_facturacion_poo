@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Videojuego
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Videojuego\ here.\r\n\ Clase\ Videojuego\ que\ extiende\ de\ Producto\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n
+comment1.params=nombre\ precioUnit\ cantStock\ disponible\ videoconsola
+comment1.target=Videojuego(java.lang.String,\ double,\ int,\ boolean,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getVideoconsola()
+comment3.params=videoconsola
+comment3.target=void\ setVideoconsola(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5
