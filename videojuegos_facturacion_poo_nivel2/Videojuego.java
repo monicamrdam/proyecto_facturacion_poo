@@ -9,8 +9,8 @@ public class Videojuego extends Producto
 {
   private String videoconsola;
   
-  public Videojuego(String nombre, double precioUnit, int cantStock, boolean disponible, String videoconsola) {
-    super(nombre, precioUnit, cantStock, disponible);
+  public Videojuego(CaracteristicasProductos cproducto, String videoconsola) {
+    super(cproducto);
     this.videoconsola = videoconsola;
   }
    public String getVideoconsola() {
