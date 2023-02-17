@@ -21,7 +21,7 @@ public class Videojuego extends Producto
   }
   @Override
   public String toString() {
-    return  "Articulo de Videoconsolan"+
+    return  "Articulo de Videoconsola \n"+
         super.toString()+
         "Videoconsola: "  +this.videoconsola;
   }
