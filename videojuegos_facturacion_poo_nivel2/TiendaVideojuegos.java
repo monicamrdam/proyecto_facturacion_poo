@@ -33,6 +33,7 @@ public class TiendaVideojuegos
                     break;
                 case "3":
                     System.out.println("Has seleccionado comprar productos");
+                    ControlProductos.comprarProductos();
                     break;
                 case "4":
                     System.out.println("Has seleccionado mostrar caja");
