@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Recibo
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Recibo\ here.\r\n\ Clase\ recibo\ que\ hereda\ de\ la\ Clase\ Comprobante\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n
+comment1.params=serie\ fecha\ razonSocial
+comment1.target=Recibo(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getSerie()
+comment3.params=serie
+comment3.target=void\ setSerie(java.lang.String)
+numComments=4
