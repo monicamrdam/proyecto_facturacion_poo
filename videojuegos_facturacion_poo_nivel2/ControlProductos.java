@@ -188,11 +188,11 @@ public class ControlProductos
                 ControlProductos.imprimirCine(ControlProductos.obtenerDatosCine());
                 break;
             case "2":
-                System.out.println("Has seleccionado insertar producto: musica");
+                System.out.println("Has seleccionado mostrar: musica");
                 ControlProductos.imprimirMusica(ControlProductos.obtenerDatosMusica());
                 break;
             case "3":
-                System.out.println("Has seleccionado insertar producto: videojuegos");
+                System.out.println("Has seleccionado mostrar: videojuegos");
                 ControlProductos.imprimirVideojuego(ControlProductos.obtenerDatosVideojuego());
                 break;
             default:
@@ -337,33 +337,63 @@ public class ControlProductos
     }
 
     
-    public void mostrarProductos(Producto[] productos) { 
-        for (int i = 0; i < productos.length; i++) {
-            System.out.print(productos[i]+"n-------n");
+    public static void comprarProductos(){
+        String opcion="";
+        System.out.println("\nQue tipo de producto quieres comprar:\n"
+            +"1. Cine \n"
+            +"2. Musica \n"
+            +"3. Videojuegos \n");            
+        opcion=sc.nextLine();
+        switch(opcion){
+            case "1":
+                System.out.println("Has seleccionado comprar: cine");
+                ControlProductos.mostrarnombreCine();
+                break;
+            case "2":
+                System.out.println("Has seleccionado comprar: musica");
+                ControlProductos.imprimirMusica(ControlProductos.obtenerDatosMusica());
+                break;
+            case "3":
+                System.out.println("Has seleccionado comprar: videojuegos");
+                ControlProductos.imprimirVideojuego(ControlProductos.obtenerDatosVideojuego());
+                break;
+            default:
+                System.out.println("Has seleccionado una opción incorrecta");
+        }
+
+    }
+    public static void mostrarnombreCine(){
+        ArrayList<String> peliculas = new ArrayList<String>();
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
+            bufferedReader = new BufferedReader(fileReader);
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                String[] arrayPelicula = linea.split(SEPARADOR_CAMPO);
+                peliculas.add(arrayPelicula[0]);
+            }
+        } catch (IOException e) {
+            System.out.println("Excepción leyendo archivo: " + e.getMessage());
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Excepción cerrando: " + e.getMessage());
+            }
+        }
+        for (int x = 0; x < peliculas.size(); x++) {
+            System.out.printf("|%-40s|\n", peliculas.get(x));
+            System.out.println(
+                "+-----+----------+---------------------------------+");
         }
     }
-
-    public void mostrarNombreProductos(Producto[] productos) { 
-        for (int i = 0; i < productos.length; i++) {
-            System.out.println(i+1 +" "+productos[i].getNombre()+"n");
-        }
-        System.out.println("n------------n");
-    } 
-
-    public double comprarProducto(Producto[] productos, int num, int cantidadUnidades) {
-        if (productos[num-1].isDisponible()) {
-            if (productos[num-1].getCantStock() >= cantidadUnidades){
-                System.out.println("La compra se ha realizado con éxito!!n");
-                productos[num -1].setCantStock(productos[num -1].getCantStock()-cantidadUnidades);
-                return caja+=cantidadUnidades*productos[num-1].getPrecioUnit();
-            } else {System.out.println("No hay cantidad suficiente de producto");}
-        } else {System.out.println("No hay cantidad suficiente de producto");}
-        return caja;
     }
+    
 
-    public double mostrarCaja() {
-        System.out.print("El total de la caja es ");
-        caja=Math.round(caja*100);
-        return caja/100;
-    } 
-}
