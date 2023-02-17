@@ -9,8 +9,8 @@ public class Cine extends Producto
 {
   private String director;
   
-  public Cine(String nombre, double precioUnit, int cantStock, boolean disponible, String director) {
-    super(nombre, precioUnit, cantStock, disponible);
+  public Cine(CaracteristicasProductos cproducto, String director) {
+    super(cproducto);
     this.director = director;
   }
    public String getDirector() {
