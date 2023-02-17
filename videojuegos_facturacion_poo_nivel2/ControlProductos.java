@@ -15,6 +15,9 @@ public class ControlProductos
     private static final String NOMBRE_ARCHIVO_MUSICA = "musica.txt";
     private static final String SEPARADOR_CAMPO = "; ";
     private static final String SEPARADOR_REGISTRO = "\n";
+    private static CaracteristicasProductos cproducto;
+    private static Scanner sc = new Scanner(System.in);
+    
     
     private Producto productos[] = null;
   private double caja;
@@ -26,7 +29,6 @@ public class ControlProductos
   }
   
   public static void solicitarDatosParaRegistrar(){
-      Scanner sc = new Scanner(System.in);
       String opcion="";
       System.out.println("\nQue tipo de producto es:\n"
       +"1. Cine \n"
@@ -51,25 +53,24 @@ public class ControlProductos
     }
   
     private static boolean isDouble(String cadena){
-	try {
-		Double.parseDouble(cadena);
-		return true;
-	} catch (NumberFormatException nfe){
-		return false;
-	}
+    try {
+        Double.parseDouble(cadena);
+        return true;
+    } catch (NumberFormatException nfe){
+        return false;
+    }
 }
     private static boolean isInt(String cadena){
-	try {
-		Integer.parseInt(cadena);
-		return true;
-	} catch (NumberFormatException nfe){
-		return false;
-	}
+    try {
+        Integer.parseInt(cadena);
+        return true;
+    } catch (NumberFormatException nfe){
+        return false;
+    }
 }
   
-  public static void solicitarDatosParaRegistrarMusica() {
-        Scanner sc = new Scanner(System.in);
-              System.out.println("Ingrese el nombre: ");
+  public static CaracteristicasProductos solicitarDatosParaRegistrarProductos() {
+          System.out.println("Ingrese el nombre: ");
           String nombre= sc.nextLine();
           String precioUnit;
           do{
@@ -87,21 +88,26 @@ public class ControlProductos
 
               System.out.println("Ingrese si esta disponible: (si/no) ");
               respuesta= sc.nextLine();
-              if (Character.toUpperCase(respuesta.charAt(0))=='S'){
+              if (respuesta.toUpperCase().equals("SI")){
                  disponible="true";
-              }else if(Character.toUpperCase(respuesta.charAt(0))=='N'){
+              }else if(respuesta.toUpperCase().equals("N0")){
                   disponible="false";
               }else{
                   System.out.print("Opcion incorrecta");
               }
     
           }while(!(disponible.equals("true") || disponible.equals("false")));
+          cproducto = new CaracteristicasProductos(nombre, Double.parseDouble(precioUnit), Integer.parseInt(cantStock), Boolean.parseBoolean(disponible));
+          return cproducto;
           
-          
-          
+        }
+    public static String solicitarDatosCantante(){
         System.out.println("Ingrese el cantante: ");
         String cantante = sc.nextLine();
-        ControlProductos.registrar(new Musica(nombre, Double.parseDouble(precioUnit), Integer.parseInt(cantStock),Boolean.parseBoolean(disponible),cantante));
+        return cantante;
+    }
+    public static void solicitarDatosParaRegistrarMusica(){      
+        ControlProductos.registrar(new Musica(ControlProductos.solicitarDatosParaRegistrarProductos(),ControlProductos.solicitarDatosCantante()));
         System.out.println("Registrado exitosamente");
     }
 
@@ -115,6 +121,9 @@ public class ControlProductos
             System.out.println("Error escribiendo en archivo: " + e.getMessage());
         }
     }
+    
+    
+    
     
     
     
