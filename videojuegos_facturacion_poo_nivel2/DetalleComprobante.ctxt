@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=DetalleComprobante
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ DetalleComprobante\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=cantidad\ descripcion\ precio
+comment1.target=DetalleComprobante(int,\ java.lang.String,\ double)
+comment10.params=
+comment10.target=java.lang.String\ reporteDescripcion()
+comment2.params=
+comment2.target=void\ setTotal()
+comment3.params=
+comment3.target=double\ getTotal()
+comment4.params=cantidad
+comment4.target=void\ setCantidad(int)
+comment5.params=
+comment5.target=int\ getCantidad()
+comment6.params=
+comment6.target=ProductoComprado\ getProducto()
+comment7.params=descripcion\ precio
+comment7.target=ProductoComprado\ crearProducto(java.lang.String,\ double)
+comment8.params=descripcion\ precio
+comment8.target=void\ ingresarProducto(java.lang.String,\ double)
+comment9.params=
+comment9.target=double\ calcularTotal()
+numComments=11

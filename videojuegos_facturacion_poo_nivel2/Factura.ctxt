@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Factura
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Factura\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=ruc\ fecha\ razonSocial
+comment1.target=Factura(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment10.params=
+comment10.target=java.lang.String\ reporteComprobante()
+comment2.params=
+comment2.target=java.lang.String\ getRuc()
+comment3.params=ruc
+comment3.target=void\ setRuc(java.lang.String)
+comment4.params=
+comment4.target=double\ getIgv()
+comment5.params=igv
+comment5.target=void\ setIgv(double)
+comment6.params=
+comment6.target=double\ calcularTotal()
+comment7.params=
+comment7.target=void\ setTotal()
+comment8.params=
+comment8.target=double\ calcularIGV()
+comment9.params=
+comment9.target=void\ setIGV()
+numComments=11
