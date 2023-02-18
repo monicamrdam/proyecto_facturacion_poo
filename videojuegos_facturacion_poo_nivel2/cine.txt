@@ -1,6 +1,3 @@
-los fabelman; 10.0; 2; true; Steven Spielberg;
+los fabelman; 10.0; 3; false; Steven Spielberg;
 la niña de la comunion; 20.0; 5; true; Victor Garcia;
-avatar: el sentido del agua; 30.0; 3; true; James Cameron;
-los fabelman; 10.0; 2; true; Steven Spielberg;
-la niña de la comunion; 20.0; 5; true; Victor Garcia;
-avatar: el sentido del agua; 30.0; 0; true; James Cameron;
+avatar: el sentido del agua; 30.0; 2; true; James Cameron;
