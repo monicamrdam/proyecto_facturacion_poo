@@ -4,6 +4,10 @@
  * Clase Cine que extiende de Producto
  * @author (monicamrdam) 
  * @version (17/02/2023)
+ * Datos incorporados archivo
+ * Los Fabelman; 10.0; 2; true; Steven Spielberg;
+ * La niña de la comunion; 20.0; 5; true; Victor Garcia;
+ * Avatar: el sentido del agua; 30.0; 3; true; James Cameron;
  */
 public class Cine extends Producto 
 {

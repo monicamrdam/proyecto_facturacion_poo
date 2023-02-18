@@ -1,3 +1,3 @@
-Los Fabelman; 34.0; 1; true; Steven Spielberg
-La niña de la comunión; 36.0; 4; false; Victor Garcia
-As bestas; 60.6; 1; true; Rodrigo Sorogoyen
+Los Fabelman; 10.0; 2; true; Steven Spielberg;
+La niña de la comunion; 20.0; 5; true; Victor Garcia;
+Avatar: el sentido del agua; 30.0; 3; true; James Cameron;
