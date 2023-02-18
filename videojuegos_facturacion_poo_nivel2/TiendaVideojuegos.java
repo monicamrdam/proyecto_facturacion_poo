@@ -17,7 +17,7 @@ public class TiendaVideojuegos
                 +"1. Insertar Productos \n"
                 +"2. Mostrar productos \n"
                 +"3. Vender productos \n"
-                +"4. Mostrar caja\n"
+                +"4. Mostrar ventas\n"
                 +"5. Emitir factura\n"
                 +"0. Salir\n"
             );            
@@ -36,7 +36,8 @@ public class TiendaVideojuegos
                     ControlProductos.comprarProductos();
                     break;
                 case "4":
-                    System.out.println("Has seleccionado mostrar caja");
+                    System.out.println("Has seleccionado mostrar ventas");
+                    ControlProductos.mostrarVentas();
                     break;
                 case "5":
                     System.out.println("Has seleccionado emitir factura");

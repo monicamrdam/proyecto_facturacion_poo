@@ -18,6 +18,7 @@ public class ControlProductos
     private static final String NOMBRE_ARCHIVO_CINE = "cine.txt";
     private static final String NOMBRE_ARCHIVO_MUSICA = "musica.txt";
     private static final String NOMBRE_ARCHIVO_VIDEOJUEGOS = "videojuegos.txt";
+    private static final String NOMBRE_ARCHIVO_VENTAS = "ventas.txt";
     private static final String SEPARADOR_CAMPO = "; ";
     private static final String SEPARADOR_REGISTRO = "\n";
     private static CaracteristicasProductos cproducto;
@@ -161,7 +162,7 @@ public class ControlProductos
             bufferedWriter.write(videoconsola.getNombre() + SEPARADOR_CAMPO + videoconsola.getPrecioUnit() + SEPARADOR_CAMPO
                 + videoconsola.getCantStock() + SEPARADOR_CAMPO + videoconsola.isDisponible() + SEPARADOR_CAMPO+ videoconsola.getVideoconsola() + SEPARADOR_REGISTRO );
             bufferedWriter.close();
-            } catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error escribiendo en archivo: " + e.getMessage());
         }
     }
@@ -407,6 +408,7 @@ public class ControlProductos
             fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
             bufferedReader = new BufferedReader(fileReader);
             String linea;
+            todaslineas.clear();
             while ((linea = bufferedReader.readLine()) != null) {
                 if(linea.contains(productoComprar)){
                     System.out.println("ProductoComprar " + productoComprar +"\n"+ ": " + linea);
@@ -416,9 +418,9 @@ public class ControlProductos
                     String disponible=arrayPelicula[3];
                     String director=arrayPelicula[4];
 
-                    if(cantStock < cantidadComprar){
+                    if(cantStock <= cantidadComprar){
                         disponible= "false";
-                        System.out.print("No es posible comprar esa cantidad, actualmente hay solo disponible:  " +  cantStock );
+                        System.out.print("No es posible comprar esa cantidad, actualmente hay disponible:  " +  cantStock );
                         System.out.println("");
                     }else{
                         cantStock -= cantidadComprar;
@@ -429,7 +431,6 @@ public class ControlProductos
                 }else{
                     todaslineas.add(linea);      
                 }
-
             }
         } catch (IOException e) {
             System.out.println("Excepción leyendo archivo: " + e.getMessage());
@@ -477,14 +478,56 @@ public class ControlProductos
             }
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("Error Adios: " + e.getMessage());
+            System.out.println("Error escribir nuevo archivo: " + e.getMessage());
         }
         ControlProductos.imprimirCine(ControlProductos.obtenerDatosCine());
     }
 
     public static double gananciasVentas(String productoComprado,double precioUnit, int cantidadComprar){
-        double caja=0;
-        return caja;
+        double ganancias= precioUnit * cantidadComprar;
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_VENTAS, true));
+            bufferedWriter.write(productoComprado + SEPARADOR_CAMPO + ganancias);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error escribiendo en archivo: " + e.getMessage());
+        }
+        return ganancias;
+    }
+
+    public static void mostrarVentas(){
+        ArrayList<String> ventas = new ArrayList<String>();
+        try {
+            fileReader = new FileReader(NOMBRE_ARCHIVO_VENTAS);
+            bufferedReader = new BufferedReader(fileReader);
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                String[] arrayVentas = linea.split(SEPARADOR_CAMPO);
+                ventas.add(arrayVentas[0] + SEPARADOR_CAMPO + arrayVentas[1]);
+            }
+        } catch (IOException e) {
+            System.out.println("Excepción leyendo archivo: " + e.getMessage());
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Excepción cerrando: " + e.getMessage());
+            }
+        }
+        System.out.println("Listado de ventas realizadas");
+        for (int x = 0; x < ventas.size(); x++) {
+            System.out.println(
+                "+-----+----------+---------------------------------+");
+            System.out.print(ventas.get(x));
+            System.out.println(
+                "+-----+----------+---------------------------------+");
+                
+        }
     }
 }
 
