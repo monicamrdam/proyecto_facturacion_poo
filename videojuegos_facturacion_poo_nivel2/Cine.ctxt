@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Cine
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cine\ here.\r\n\ Clase\ Cine\ que\ extiende\ de\ Producto\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n\ Datos\ incorporados\ archivo\r\n\ Los\ Fabelman;\ 10.0;\ 2;\ true;\ Steven\ Spielberg;\r\n\ La\ ni\u00F1a\ de\ la\ comunion;\ 20.0;\ 5;\ true;\ Victor\ Garcia;\r\n\ Avatar\:\ el\ sentido\ del\ agua;\ 30.0;\ 3;\ true;\ James\ Cameron;\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cine\ here.\r\n\ Clase\ Cine\ que\ extiende\ de\ Producto\r\n\ @author\ (monicamrdam)\ \r\n\ @version\ (17/02/2023)\r\n\ Datos\ incorporados\ archivo\r\n\ los\ fabelman;\ 10.0;\ 2;\ true;\ Steven\ Spielberg;\r\n\ la\ ni\u00F1a\ de\ la\ comunion;\ 20.0;\ 5;\ true;\ Victor\ Garcia;\r\n\ avatar\:\ el\ sentido\ del\ agua;\ 30.0;\ 3;\ true;\ James\ Cameron;\r\n
 comment1.params=cproducto\ director
 comment1.target=Cine(CaracteristicasProductos,\ java.lang.String)
 comment2.params=
