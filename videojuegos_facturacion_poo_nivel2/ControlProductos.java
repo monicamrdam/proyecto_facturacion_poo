@@ -336,7 +336,6 @@ public class ControlProductos
         }
     }
 
-    
     public static void comprarProductos(){
         String opcion="";
         System.out.println("\nQue tipo de producto quieres comprar:\n"
@@ -348,6 +347,7 @@ public class ControlProductos
             case "1":
                 System.out.println("Has seleccionado comprar: cine");
                 ControlProductos.mostrarnombreCine();
+                ControlProductos.comprarProducto(ControlProductos.solicitarProductoComprarCine(),ControlProductos.solicitarCantidadComprarCine());
                 break;
             case "2":
                 System.out.println("Has seleccionado comprar: musica");
@@ -362,6 +362,7 @@ public class ControlProductos
         }
 
     }
+
     public static void mostrarnombreCine(){
         ArrayList<String> peliculas = new ArrayList<String>();
         FileReader fileReader = null;
@@ -388,12 +389,91 @@ public class ControlProductos
                 System.out.println("Excepción cerrando: " + e.getMessage());
             }
         }
+        System.out.println("Listado de cine en el catálogo");
         for (int x = 0; x < peliculas.size(); x++) {
-            System.out.printf("|%-40s|\n", peliculas.get(x));
+
             System.out.println(
                 "+-----+----------+---------------------------------+");
+            System.out.printf("|%-40s|\n", peliculas.get(x));
         }
     }
+
+    public static String solicitarProductoComprarCine(){
+        System.out.println("¿Qué producto desea comprar?: ");
+        String productoComprar = sc.nextLine();
+        return productoComprar;
     }
-    
+
+    public static int solicitarCantidadComprarCine(){
+        String cantContomprar;
+        do{
+            System.out.println("¿Qué cantidad desea comprar?: ");
+            cantContomprar = sc.nextLine();
+        }while(!ControlProductos.isInt(cantContomprar));
+        return Integer.parseInt(cantContomprar);
+    }
+
+    public static void comprarProducto(String productoComprar, int cantidadComprar){
+        ArrayList<Cine> peliculaComprar = new ArrayList<>();
+        ArrayList<String> todaslineas= new ArrayList<>();
+        String nuevalinea="";
+        FileReader fileReader = null;
+        FileWriter fileWriter=null;
+        BufferedReader bufferedReader = null;
+        BufferedWriter buffereWriter = null;
+        try {
+            fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
+            bufferedReader = new BufferedReader(fileReader);
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                if(linea.contains(productoComprar)){
+                    System.out.println("ProductoComprar " + productoComprar + ": " + linea);
+                    String[] arrayPelicula = linea.split(SEPARADOR_CAMPO);
+                    double precioUnit=Double.parseDouble(arrayPelicula[1]);
+                    int cantStock=Integer.parseInt(arrayPelicula[2]);
+                    String disponible=arrayPelicula[3];
+                    String director=arrayPelicula[4];
+
+                    if(cantStock < cantidadComprar){
+                        disponible= "false";
+                        System.out.print("No es posible comprar esa cantidad, actualmente hay solo disponible:  " +  cantStock);
+                    }else{
+                        cantStock -= cantidadComprar;
+                        ControlProductos.gananciasVentas(productoComprar,precioUnit, cantidadComprar);
+                    } 
+                    nuevalinea=(productoComprar +String.valueOf(precioUnit) + String.valueOf(cantStock)+ disponible + director);
+                    todaslineas.add(nuevalinea);
+                }
+                System.out.print("tamaño todaslineas" + todaslineas.size());
+                todaslineas.add(linea);
+
+            }
+        } catch (IOException e) {
+            System.out.println("Excepción leyendo archivo: " + e.getMessage());
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Excepción cerrando: " + e.getMessage());
+            }
+        }
+         System.out.println("Listado");
+            for (int x = 0; x < todaslineas.size(); x++) {
+
+                System.out.println(
+                    "+-----+----------+---------------------------------+");
+                System.out.printf("|%-40s|\n", todaslineas.get(x));
+            }
+    }
+
+    public static double gananciasVentas(String productoComprado,double precioUnit, int cantidadComprar){
+        double caja=0;
+        return caja;
+    }
+}
 
