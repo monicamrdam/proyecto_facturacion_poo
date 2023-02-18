@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
 
 /**
  * Write a description of class ControlProductos here.
@@ -21,19 +22,14 @@ public class ControlProductos
     private static final String SEPARADOR_REGISTRO = "\n";
     private static CaracteristicasProductos cproducto;
     private static Scanner sc = new Scanner(System.in);
-
-    private Producto productos[] = null;
-    private double caja;
-
-    //Constructors
-    public ControlProductos() { }
-
-    public ControlProductos(Producto[] productos) {
-        this.productos = productos;
-    }
+    private static String opcion="";
+    private static ArrayList<String> todaslineas= new ArrayList<>();
+    private static BufferedWriter bufferedWriter = null;
+    private static FileWriter fileWriter=null;
+    private static FileReader fileReader = null;
+    private static BufferedReader bufferedReader = null;
 
     public static void solicitarDatosParaRegistrar(){
-        String opcion="";
         System.out.println("\nQue tipo de producto es:\n"
             +"1. Cine \n"
             +"2. Musica \n"
@@ -104,7 +100,7 @@ public class ControlProductos
             }
 
         }while(!(disponible.equals("true") || disponible.equals("false")));
-        cproducto = new CaracteristicasProductos(nombre, Double.parseDouble(precioUnit), Integer.parseInt(cantStock), Boolean.parseBoolean(disponible));
+        cproducto = new CaracteristicasProductos(nombre.toLowerCase(), Double.parseDouble(precioUnit), Integer.parseInt(cantStock), Boolean.parseBoolean(disponible));
         return cproducto;
 
     }
@@ -117,8 +113,8 @@ public class ControlProductos
 
     public static void registrar(Cine cine) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_CINE, true));
-            bufferedWriter.write(cine.getNombre() + SEPARADOR_CAMPO + cine.getPrecioUnit() + SEPARADOR_CAMPO
+            bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_CINE, true));
+            bufferedWriter.write(cine.getNombre().toLowerCase() + SEPARADOR_CAMPO + cine.getPrecioUnit() + SEPARADOR_CAMPO
                 + cine.getCantStock() + SEPARADOR_CAMPO + cine.isDisponible() + SEPARADOR_CAMPO+ cine.getDirector() + SEPARADOR_REGISTRO );
             bufferedWriter.close();
         } catch (IOException e) {
@@ -139,7 +135,7 @@ public class ControlProductos
 
     public static void registrar(Musica musica) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_MUSICA, true));
+            bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_MUSICA, true));
             bufferedWriter.write(musica.getNombre() + SEPARADOR_CAMPO + musica.getPrecioUnit() + SEPARADOR_CAMPO
                 + musica.getCantStock() + SEPARADOR_CAMPO + musica.isDisponible() + SEPARADOR_CAMPO+ musica.getCantante() + SEPARADOR_REGISTRO );
             bufferedWriter.close();
@@ -161,11 +157,11 @@ public class ControlProductos
 
     public static void registrar(Videojuego videoconsola) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_MUSICA, true));
+            bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_MUSICA, true));
             bufferedWriter.write(videoconsola.getNombre() + SEPARADOR_CAMPO + videoconsola.getPrecioUnit() + SEPARADOR_CAMPO
                 + videoconsola.getCantStock() + SEPARADOR_CAMPO + videoconsola.isDisponible() + SEPARADOR_CAMPO+ videoconsola.getVideoconsola() + SEPARADOR_REGISTRO );
             bufferedWriter.close();
-        } catch (IOException e) {
+            } catch (IOException e) {
             System.out.println("Error escribiendo en archivo: " + e.getMessage());
         }
     }
@@ -176,7 +172,6 @@ public class ControlProductos
     }
 
     public static void mostrarProductos(){
-        String opcion="";
         System.out.println("\nQue tipo de producto quieres mostrar:\n"
             +"1. Cine \n"
             +"2. Musica \n"
@@ -203,8 +198,6 @@ public class ControlProductos
 
     public static ArrayList<Cine> obtenerDatosCine() {
         ArrayList<Cine> peliculas = new ArrayList<>();
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
         try {
             fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
             bufferedReader = new BufferedReader(fileReader);
@@ -248,8 +241,6 @@ public class ControlProductos
 
     public static ArrayList<Musica> obtenerDatosMusica() {
         ArrayList<Musica> canciones = new ArrayList<>();
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
         try {
             fileReader = new FileReader(NOMBRE_ARCHIVO_MUSICA);
             bufferedReader = new BufferedReader(fileReader);
@@ -293,8 +284,6 @@ public class ControlProductos
 
     public static ArrayList<Videojuego> obtenerDatosVideojuego() {
         ArrayList<Videojuego> videojuegos = new ArrayList<>();
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
         try {
             fileReader = new FileReader(NOMBRE_ARCHIVO_VIDEOJUEGOS);
             bufferedReader = new BufferedReader(fileReader);
@@ -337,7 +326,6 @@ public class ControlProductos
     }
 
     public static void comprarProductos(){
-        String opcion="";
         System.out.println("\nQue tipo de producto quieres comprar:\n"
             +"1. Cine \n"
             +"2. Musica \n"
@@ -347,7 +335,7 @@ public class ControlProductos
             case "1":
                 System.out.println("Has seleccionado comprar: cine");
                 ControlProductos.mostrarnombreCine();
-                ControlProductos.comprarProducto(ControlProductos.solicitarProductoComprarCine(),ControlProductos.solicitarCantidadComprarCine());
+                ControlProductos.reescrituraArchivoTxt(ControlProductos.solicitarProductoComprarCine(),ControlProductos.solicitarCantidadComprarCine());
                 break;
             case "2":
                 System.out.println("Has seleccionado comprar: musica");
@@ -365,8 +353,6 @@ public class ControlProductos
 
     public static void mostrarnombreCine(){
         ArrayList<String> peliculas = new ArrayList<String>();
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
         try {
             fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
             bufferedReader = new BufferedReader(fileReader);
@@ -399,6 +385,7 @@ public class ControlProductos
     }
 
     public static String solicitarProductoComprarCine(){
+        System.out.println("");
         System.out.println("¿Qué producto desea comprar?: ");
         String productoComprar = sc.nextLine();
         return productoComprar;
@@ -413,21 +400,16 @@ public class ControlProductos
         return Integer.parseInt(cantContomprar);
     }
 
-    public static void comprarProducto(String productoComprar, int cantidadComprar){
+    public static ArrayList<String> comprarProducto(String productoComprar, int cantidadComprar){
         ArrayList<Cine> peliculaComprar = new ArrayList<>();
-        ArrayList<String> todaslineas= new ArrayList<>();
         String nuevalinea="";
-        FileReader fileReader = null;
-        FileWriter fileWriter=null;
-        BufferedReader bufferedReader = null;
-        BufferedWriter buffereWriter = null;
         try {
             fileReader = new FileReader(NOMBRE_ARCHIVO_CINE);
             bufferedReader = new BufferedReader(fileReader);
             String linea;
             while ((linea = bufferedReader.readLine()) != null) {
                 if(linea.contains(productoComprar)){
-                    System.out.println("ProductoComprar " + productoComprar + ": " + linea);
+                    System.out.println("ProductoComprar " + productoComprar +"\n"+ ": " + linea);
                     String[] arrayPelicula = linea.split(SEPARADOR_CAMPO);
                     double precioUnit=Double.parseDouble(arrayPelicula[1]);
                     int cantStock=Integer.parseInt(arrayPelicula[2]);
@@ -436,16 +418,17 @@ public class ControlProductos
 
                     if(cantStock < cantidadComprar){
                         disponible= "false";
-                        System.out.print("No es posible comprar esa cantidad, actualmente hay solo disponible:  " +  cantStock);
+                        System.out.print("No es posible comprar esa cantidad, actualmente hay solo disponible:  " +  cantStock );
+                        System.out.println("");
                     }else{
                         cantStock -= cantidadComprar;
                         ControlProductos.gananciasVentas(productoComprar,precioUnit, cantidadComprar);
                     } 
-                    nuevalinea=(productoComprar +String.valueOf(precioUnit) + String.valueOf(cantStock)+ disponible + director);
+                    nuevalinea=(productoComprar +SEPARADOR_CAMPO + String.valueOf(precioUnit) + SEPARADOR_CAMPO + String.valueOf(cantStock) +SEPARADOR_CAMPO + disponible + SEPARADOR_CAMPO + director);
                     todaslineas.add(nuevalinea);
+                }else{
+                    todaslineas.add(linea);      
                 }
-                System.out.print("tamaño todaslineas" + todaslineas.size());
-                todaslineas.add(linea);
 
             }
         } catch (IOException e) {
@@ -453,7 +436,7 @@ public class ControlProductos
         } finally {
             try {
                 if (fileReader != null) {
-                    fileReader.close();
+                    fileReader.close();;
                 }
                 if (bufferedReader != null) {
                     bufferedReader.close();
@@ -462,13 +445,41 @@ public class ControlProductos
                 System.out.println("Excepción cerrando: " + e.getMessage());
             }
         }
-         System.out.println("Listado");
-            for (int x = 0; x < todaslineas.size(); x++) {
+        System.out.println("Listado Actualizado");
+        for (int x = 0; x < todaslineas.size(); x++) {
+            System.out.println(todaslineas.get(x));
+            System.out.println(
+                "+-----+----------+---------------------------------+");
+        }
+        ControlProductos.borradoArchivoTxt();
+        return todaslineas;
 
-                System.out.println(
-                    "+-----+----------+---------------------------------+");
-                System.out.printf("|%-40s|\n", todaslineas.get(x));
+    }
+
+    public static void borradoArchivoTxt(){
+        try{
+            File fichero = new File(NOMBRE_ARCHIVO_CINE); 
+            fichero.delete();
+            System.out.printf("borrado archivo. \n");
+        }catch(Exception e){
+            System.out.println("Excepción borrando archivo: " + e.getMessage());
+        }
+    }
+
+    public static void reescrituraArchivoTxt(String productoComprar, int cantidadComprar){
+        todaslineas=ControlProductos.comprarProducto(productoComprar, cantidadComprar);
+        System.out.println(todaslineas.size());
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(NOMBRE_ARCHIVO_CINE, true));
+            for (int x = 0; x < todaslineas.size(); x++) {
+                System.out.println(todaslineas.get(x));
+                bufferedWriter.write(todaslineas.get(x) + "\n");
             }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error Adios: " + e.getMessage());
+        }
+        ControlProductos.imprimirCine(ControlProductos.obtenerDatosCine());
     }
 
     public static double gananciasVentas(String productoComprado,double precioUnit, int cantidadComprar){
